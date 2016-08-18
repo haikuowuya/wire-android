@@ -30,6 +30,7 @@ import com.waz.zclient.controllers.{DefaultControllerFactory, IControllerFactory
 import com.waz.zclient.core.stores.IStoreFactory
 import com.waz.zclient.notifications.controllers.{CallingNotificationsController, ImageNotificationsController, MessageNotificationsController}
 import com.waz.zclient.utils.{BackendPicker, BuildConfigUtils, Callback}
+import com.waz.zclient.controllers.global.AccentColorController
 
 object WireApplication {
   var APP_INSTANCE: WireApplication = _
@@ -37,6 +38,7 @@ object WireApplication {
   lazy val Global = new Module {
     bind[Signal[Option[ZMessaging]]] to ZMessaging.currentUi.currentZms
     bind[PreferenceService] to new PreferenceService(inject[Context])
+    bind[AccentColorController] to new AccentColorController()
     bind[GlobalCallingController] to new GlobalCallingController(inject[Context])
     bind[GlobalCameraController] to new GlobalCameraController(inject[Context], new AndroidCameraFactory)(EventContext.Global)
     bind[MediaManagerService] to ZMessaging.currentGlobal.mediaManager

@@ -127,6 +127,7 @@ import com.waz.zclient.core.stores.inappnotification.KnockingEvent;
 import com.waz.zclient.core.stores.network.DefaultNetworkAction;
 import com.waz.zclient.core.stores.network.NetworkStoreObserver;
 import com.waz.zclient.core.stores.participants.ParticipantsStoreObserver;
+import com.waz.zclient.messages.MessagesListView;
 import com.waz.zclient.notifications.controllers.ImageNotificationsController;
 import com.waz.zclient.pages.BaseFragment;
 import com.waz.zclient.pages.extendedcursor.ExtendedCursorContainer;
@@ -234,6 +235,7 @@ public class ConversationFragment extends BaseFragment<ConversationFragment.Cont
     private String lastHotPingMessageId;
     private Toolbar toolbar;
     private TextView toolbarTitle;
+    private MessagesListView messagesList;
 
     private CursorLayout cursorLayout;
     private AudioMessageRecordingView audioMessageRecordingView;
@@ -499,6 +501,7 @@ public class ConversationFragment extends BaseFragment<ConversationFragment.Cont
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_conversation, viewGroup, false);
 
+        messagesList = ViewUtils.getView(view, R.id.messages_list_view);
         extendedCursorContainer = ViewUtils.getView(view, R.id.ecc__conversation);
         containerPreview = ViewUtils.getView(view, R.id.fl__conversation_overlay);
         cursorLayout = ViewUtils.getView(view, R.id.cl__cursor);
@@ -1668,6 +1671,7 @@ public class ConversationFragment extends BaseFragment<ConversationFragment.Cont
 
     @Override
     public void onCursorClicked() {
+        messagesList.scrollToBottom();
     }
 
     @Override

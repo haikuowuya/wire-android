@@ -675,11 +675,6 @@ public class ParticipantHeaderFragment extends BaseFragment<ParticipantHeaderFra
     }
 
     @Override
-    public void onMessagesUpdated(MessagesList messagesList) {
-
-    }
-
-    @Override
     public void onConnectUserUpdated(final User user, IConnectStore.UserRequester usertype) {
         if (usertype != userRequester) {
             return;

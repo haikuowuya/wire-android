@@ -271,18 +271,18 @@ public class ConversationFragment extends BaseFragment<ConversationFragment.Cont
         }
     };
 
-    private final ModelObserver<MessagesList> messagesListModelObserver = new ModelObserver<MessagesList>() {
-        @Override
-        public void updated(MessagesList messagesList) {
-            if (LayoutSpec.isPhone(getActivity()) &&
-                getControllerFactory().getNavigationController().getCurrentPage() != Page.MESSAGE_STREAM) {
-                return;
-            }
-
-            showLoadingIndicator(messagesList);
-            syncIndicatorModelObserver.setAndUpdate(messagesList.getSyncIndicator());
-        }
-    };
+//    private final ModelObserver<MessagesList> messagesListModelObserver = new ModelObserver<MessagesList>() {
+//        @Override
+//        public void updated(MessagesList messagesList) {
+//            if (LayoutSpec.isPhone(getActivity()) &&
+//                getControllerFactory().getNavigationController().getCurrentPage() != Page.MESSAGE_STREAM) {
+//                return;
+//            }
+//
+//            showLoadingIndicator(messagesList);
+//            syncIndicatorModelObserver.setAndUpdate(messagesList.getSyncIndicator());
+//        }
+//    };
 
     private final ModelObserver<SyncIndicator> syncIndicatorModelObserver = new ModelObserver<SyncIndicator>() {
         @Override
@@ -631,7 +631,7 @@ public class ConversationFragment extends BaseFragment<ConversationFragment.Cont
             getControllerFactory().getMentioningController().addObserver(this);
         }
 
-        messagesListModelObserver.resumeListening();
+//        messagesListModelObserver.resumeListening();
         syncIndicatorModelObserver.resumeListening();
         audioMessageRecordingView.setDarkTheme(getControllerFactory().getThemeController().isDarkTheme());
 
@@ -710,7 +710,7 @@ public class ConversationFragment extends BaseFragment<ConversationFragment.Cont
         getControllerFactory().getGlobalLayoutController().removeKeyboardVisibilityObserver(this);
         getControllerFactory().getNavigationController().removePagerControllerObserver(this);
 
-        messagesListModelObserver.pauseListening();
+//        messagesListModelObserver.pauseListening();
         syncIndicatorModelObserver.pauseListening();
 
         getStoreFactory().getConversationStore().removeConversationStoreObserver(this);
@@ -849,7 +849,7 @@ public class ConversationFragment extends BaseFragment<ConversationFragment.Cont
                 if (changeToDifferentConversation) {
                     getControllerFactory().getConversationScreenController().setConversationStreamUiReady(false);
                     toConversationType = toConversation.getType();
-                    messagesListModelObserver.setAndUpdate(toConversation.getMessages());
+//                    messagesListModelObserver.setAndUpdate(toConversation.getMessages());
                     getControllerFactory().getSharingController().maybeResetSharedText(fromConversation);
                     getControllerFactory().getSharingController().maybeResetSharedUris(fromConversation);
 
@@ -1206,7 +1206,7 @@ public class ConversationFragment extends BaseFragment<ConversationFragment.Cont
     @Override
     public void onPageVisible(Page page) {
         if (page == Page.MESSAGE_STREAM) {
-            messagesListModelObserver.forceUpdate();
+//            messagesListModelObserver.forceUpdate();
             cursorLayout.enableMessageWriting();
         }
     }
